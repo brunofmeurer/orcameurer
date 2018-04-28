@@ -8,10 +8,18 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "quasar build && rm -rf orcameurer-cordova/www/* && cp -R dist/spa-mat/. orcameurer-cordova/www/ && cd orcameurer-cordova && cordova build && cd ..",
+    "build-cordova": "quasar dev -m cordova -T android",
+    "run-mobile": "cd orcameurer-cordova && cordova run android && cd .."
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "firebase": "^4.9.1",
+    "firebase-admin": "^5.8.2",
+    "firebase-functions": "^0.8.1",
+    "moment": "^2.22.1",
+    "vuelidate": "^0.6.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

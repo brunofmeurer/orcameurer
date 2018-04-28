@@ -1,3 +1,3 @@
-# Quasar App
+# Quasar App - Orçameurer
 
-> WIP
+> Estudo: Firebase, state, componentização, vue e quasar.

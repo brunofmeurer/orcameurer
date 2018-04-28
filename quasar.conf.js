@@ -4,7 +4,10 @@ module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
     plugins: [
-      'axios'
+      'axios',
+      'firebase',
+      'filters',
+      'vuelidate'
     ],
     css: [
       'app.styl'
@@ -50,6 +53,7 @@ module.exports = function (ctx) {
         'QLayoutDrawer',
         'QPageContainer',
         'QPage',
+        'QPageSticky',
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
@@ -58,15 +62,58 @@ module.exports = function (ctx) {
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide'
+        'QItemSide',
+        'QInput',
+        'QCard',
+        'QCardMedia',
+        'QCardTitle',
+        'QCardMain',
+        'QCardSeparator',
+        'QCardActions',
+        'QAlert',
+        'QPopover',
+        'QTable',
+        'QCollapsible',
+        'QTr',
+        'QTd',
+        'QTh',
+        'QTooltip',
+        // Forms
+        'QDatetime',
+        'QField',
+        'QToggle',
+        'QSelect',
+        'QCheckbox',
+        'QRadio',
+        // Floating action
+        'QFab',
+        'QFabAction',
+        // Card
+        'QCard',
+        'QCardTitle',
+        'QCardMain',
+        'QCardMedia',
+        'QCardSeparator',
+        'QCardActions',
+        // Breadcrumb
+        'QBreadcrumbs',
+        'QBreadcrumbsEl',
+        'QChip',
+        // Loading
+        'QInnerLoading',
+        'QSpinnerGears'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'TouchHold'
       ],
       // Quasar plugins
       plugins: [
-        'Notify'
-      ]
+        'Notify',
+        'Dialog',
+        'AddressbarColor'
+      ],
+      i18n: 'pt-br'
     },
     // animations: 'all' --- includes all animations
     animations: [
