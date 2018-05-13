@@ -2,7 +2,8 @@
   <q-layout padding class="q-pt-sm bg-grey-1">
     <q-card  class="bigger fixed-center square " color="dark" style="width: 500px; max-width: 90vw; ">
       <q-card-title align="center" class="text-orange">
-        OrçaMeurer - app
+        <img src="../statics/logo.png" width="50%"/>
+        <p><big>ORÇAMEURER</big></p>
       </q-card-title>
       <q-card-main>
         <q-input ref='usuario' v-model="usuario" float-label="Usuario" @keyup.enter="login()" color="orange" class="text-orange" />
@@ -21,7 +22,6 @@
   </q-layout>
 </template>
 <script>
-import UsuarioService from '../services/usuario-service.js'
 import Seguranca from '../components/seguranca/Seguranca.js'
 import Notificacao from '../components/notificacao/Notificacao.js'
 export default {
@@ -40,8 +40,11 @@ export default {
       this.$auth.signInWithEmailAndPassword(
         this.usuario, this.senha
       ).then(element => {
+        return this.verificaPrimeiroAcesso()
+      }).then(() => {
         this.direciona()
       }).catch(er => {
+        console.log(er)
         this.notify('Usuário ou senha invalido[s]', false)
         this.loadButtonLogin = false
       })
@@ -69,9 +72,6 @@ export default {
     }
   },
   mounted () {
-    UsuarioService.set(this.$all)
-    this.$refs.usuario.focus()
-    this.$refs.senha.focus()
   }
 }
 </script>

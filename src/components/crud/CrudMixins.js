@@ -1,6 +1,7 @@
 import Notificacao from '../notificacao/Notificacao.js'
+import Seguranca from '../seguranca/Seguranca.js'
 export default {
-  mixins: [Notificacao],
+  mixins: [Notificacao, Seguranca],
   methods: {
     listar () {
       this.infoLoading = 'Listando registros...'
@@ -10,25 +11,37 @@ export default {
         this.carregandoLista = false
       })
     },
+    filtrar (method, filtro) {
+      this.infoLoading = 'Listando registros...'
+      this.carregandoLista = true
+      return this.service[method](filtro).then(elements => {
+        this.list = elements
+        this.carregandoLista = false
+      })
+    },
     cadastrar () {
       if (this.$v != null) {
         this.$v.$touch()
         if (this.$v.$error) {
-          return
+          return false
         }
       }
       this.infoLoading = 'Criando registro...'
       this.carregando = true // inicia loading
-      this.service.salvar(this.form).then(element => {
+      return this.service.salvar(this.form).then(element => {
         this.carregando = false // finaliza loading
         this.notify('Adicionado/Alterado com sucesso!', true)
-        this.cancelar()
+        if (this.cancelar != null) {
+          this.cancelar()
+        }
         this.listar()
       })
+      return true
     },
     excluir () {
+      var retorno = {}
       this.selected.forEach(element => {
-        this.$q.dialog({
+        retorno = this.$q.dialog({
           title: 'Excluir',
           message: 'Deseja realmente excluir?',
           ok: 'Sim',
@@ -36,17 +49,19 @@ export default {
           color: 'orange'
         }).then(() => {
           this.carregandoLista = true
+          this.carregando = true
           return this.service.deletar(element.doc)
         }).then(() => {
           this.notify('Excluido com sucesso!', true)
           this.listar()
         }).catch(() => {})
       })
+      return retorno
     },
     getObjects (service, list, fieldValue, fieldLabel, fieldIcon, args) {
       this[list] = []
       args = args != null ? args : []
-      service.listar().then(elements => {
+      return service.listar().then(elements => {
         elements.forEach(element => {
           var obj = {}
           if (fieldValue === 'object') {
@@ -65,11 +80,23 @@ export default {
             this[list].push(obj)
           }
         })
+        return this[list]
       })
+    },
+    convertObsToForm (obs) {
+      var retorno = {}
+      for(var key in obs) {
+        retorno[key] = obs[key]
+      }
+      return retorno
     }
   },
   created () {
-    this.service.set(this.$all)
-    this.listar()
+    this.carregandoLista = true
+    this.init([this.service]).then(() => {
+      if (this.service.listar != null) {
+        this.listar()
+      }
+    })
   }
 }

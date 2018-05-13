@@ -1,32 +1,32 @@
 import Helper from './helper.js'
 var $all
-var entidade = 'usuario'
+var entidade = 'recorrencia'
 
 function set (all) {
   $all = all
   Helper.set($all, entidade)
 }
 
-function getUsuarios () {
+function listar () {
   Helper.set($all, entidade)
   return Helper.get()
 }
 
-function getUsuariosByUid (value) {
+function getByUid (value) {
   Helper.set($all, entidade)
   return Helper.getWhere('uid', '==', value)
 }
 
-function saveUsuario (edit) {
+function salvar (edit) {
   Helper.set($all, entidade)
   return Helper.save(edit)
 }
 
-function deleteUsuario (doc) {
+function deletar (doc) {
   Helper.set($all, entidade)
   return Helper.del(doc)
 }
 
 export default {
-  set, getUsuarios, saveUsuario, deleteUsuario, getUsuariosByUid
+  set, listar, salvar, deletar, getByUid
 }

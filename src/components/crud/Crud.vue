@@ -3,7 +3,6 @@
     <q-card  class="bigger square q-pa-sm q-mt-sm">
       <q-collapsible icon="chrome_reader_mode" label="Formulário" :opened="false" ref="collaps">
         <q-card-main>
-          <!--<slot></slot>-->
           <div v-for="(obj, index) in columns" v-bind:key="index">
             <slot :name="'field-' + obj.name" :data="obj" :form="form">
               <q-input v-model="form[obj.field]" color="orange" :float-label="obj.label" :type='obj.type' :prefix="obj.prefix"/>
@@ -22,11 +21,12 @@
       :title="title"
       :data="list"
       :columns="columns"
-      :loading="this.carregandoLista"
+      :loading="carregandoLista"
       selection="single"
       :selected.sync="selected"
       color="dark"
-      dense hide-bottom>
+      :pagination="pagination"
+      hide-bottom>
       <q-tr slot="header" slot-scope="props">
         <q-th auto-width>
           <q-checkbox
@@ -72,7 +72,13 @@ export default {
       infoLoading: '',
       carregandoLista: false,
       list: [],
-      selected: []
+      selected: [],
+      pagination: {
+        sortBy: null,
+        descending: false,
+        page: 1,
+        rowsPerPage: 500
+      }
     }
   },
   methods: {
@@ -97,13 +103,6 @@ export default {
       for(var key in this.form) {
         this.form[key] = null
       }
-    },
-    convertObsToForm (obs) {
-      var retorno = {}
-      for(var key in obs) {
-        retorno[key] = obs[key]
-      }
-      return retorno
     },
     hideForm () {
       this.$refs.collaps.hide()

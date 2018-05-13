@@ -22,11 +22,16 @@ function salvar (edit) {
   return Helper.save(edit)
 }
 
+function salvarEmLote (list) {
+  Helper.set($all, entidade)
+  return Helper.salvarEmLote(list)
+}
+
 function deletar (doc) {
   Helper.set($all, entidade)
   return Helper.del(doc)
 }
 
 export default {
-  set, listar, salvar, deletar, getByUid
+  set, listar, salvar, salvarEmLote, deletar, getByUid
 }

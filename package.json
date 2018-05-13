@@ -2,7 +2,7 @@
   "name": "orcameurer",
   "version": "1.0.0",
   "description": "app para controlar orçamento da familia meurer",
-  "productName": "Orçameurer - APP",
+  "productName": "Orçameurer - app",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Brunão De la Massa <bruno.meurer@gati.inf.br>",
   "private": true,
@@ -11,14 +11,17 @@
     "test": "echo \"No test specified\" && exit 0",
     "build": "quasar build && rm -rf orcameurer-cordova/www/* && cp -R dist/spa-mat/. orcameurer-cordova/www/ && cd orcameurer-cordova && cordova build && cd ..",
     "build-cordova": "quasar dev -m cordova -T android",
-    "run-mobile": "cd orcameurer-cordova && cordova run android && cd .."
+    "run-mobile": "quasar dev -m cordova -T android",
+    "build-resource": "cd src-cordova && cordova build android --release"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chart.js": "^2.7.2",
     "firebase": "^4.9.1",
     "firebase-admin": "^5.8.2",
     "firebase-functions": "^0.8.1",
     "moment": "^2.22.1",
+    "vue-chartjs": "^3.3.1",
     "vuelidate": "^0.6.2"
   },
   "devDependencies": {

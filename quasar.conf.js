@@ -85,6 +85,7 @@ module.exports = function (ctx) {
         'QSelect',
         'QCheckbox',
         'QRadio',
+        'QSlider',
         // Floating action
         'QFab',
         'QFabAction',
@@ -101,11 +102,13 @@ module.exports = function (ctx) {
         'QChip',
         // Loading
         'QInnerLoading',
-        'QSpinnerGears'
+        'QSpinnerGears',
+        'QProgress'
       ],
       directives: [
         'Ripple',
-        'TouchHold'
+        'TouchHold',
+        'BackToTop'
       ],
       // Quasar plugins
       plugins: [

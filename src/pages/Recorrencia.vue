@@ -19,6 +19,17 @@
             {label: 'Ilimitado', value: 'Ilimitado', icon: 'date_range', leftColor: 'orange'}
           ]"/>
       </template>
+      <template slot="field-vencimento" slot-scope="scope">
+        <q-datetime
+            v-model="scope.form[scope.data.field]"
+            type="date"
+            color="orange"
+            class="text-oranger"
+            float-label="Data de vencimento"
+            icon="date_range"
+            format="DD/MM"/>
+      </template>
+      
       <template slot="coll-tipo" slot-scope="scope">
         <q-icon name="trending_up" color="positive" v-if="scope.row.tipo === 'Ganho'">
         </q-icon>
@@ -29,7 +40,7 @@
   </q-page>
 </template>
 <script>
-import PlanejamentoService from '../services/planejamento-service.js'
+import RecorrenciaService from '../services/recorrencia-service.js'
 import Crud from '../components/crud/Crud.vue'
 export default {
   components: {
@@ -37,18 +48,19 @@ export default {
   },
   data () {
     return {
-      title: 'Planejamentos',
+      title: 'Recorrencias',
       columns: [
         { name: 'descricao', label: 'Descrição', field: 'descricao', sortable: true, type: 'text' },
         { name: 'valor', label: 'Valor', field: 'valor', sortable: true, type: 'number', format: this.$options.filters.formatMoney, prefix: 'R$' },
         { name: 'tipo', label: 'Tipo', field: 'tipo', sortable: true, type: 'text' },
-        { name: 'periodo', label: 'Periodo', field: 'periodo', sortable: true, type: 'text', hide: true }
+        { name: 'periodo', label: 'Periodo', field: 'periodo', sortable: true, type: 'text', hide: true },
+        { name: 'vencimento', label: 'Data de Vencimento', field: 'vencimento', sortable: true, type: 'date', hide: true }
       ]
     }
   },
   computed: {
     service () {
-      return PlanejamentoService
+      return RecorrenciaService
     }
   }
 }

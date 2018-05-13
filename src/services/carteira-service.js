@@ -27,6 +27,11 @@ function deletar (doc) {
   return Helper.del(doc)
 }
 
+function findByDoc (doc) {
+  Helper.set($all, entidade)
+  return Helper.findByDoc(doc)
+}
+
 export default {
-  set, listar, salvar, deletar, getByUid
+  set, listar, salvar, deletar, getByUid, findByDoc
 }

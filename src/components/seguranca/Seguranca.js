@@ -1,41 +1,23 @@
-import AdminService from '../../services/admin-service.js'
+import GrupoService from '../../services/grupo-service.js'
 export default {
   data () {
     return {
-      administrador: false
     }
   },
   methods: {
-    /* verificaLogin () {
-      this.$auth.onAuthStateChanged((user) => {
-        if (user) {
-          console.log('Usuario autenticado: ', user.email)
-          this.email = user.email
-          this.$all.user = user
-          AdminService.getAdminsByIsAdmin(true).then((e) => {
-            this.administrador = e.length > 0
-          }, () => {
-            this.administrador = false
-          })
-        }
-      })
-      this.$router.push('/inicio')
-    }, */
     seguranca () {
-      this.$auth.onAuthStateChanged((user) => {
-        if (user) {
-          console.log('Usuario autenticado: ', user.email)
-          this.email = user.email
-          this.$all.user = user
-          AdminService.getAdminsByIsAdmin(true).then((e) => {
-            this.administrador = e.length > 0
-          }, () => {
-            this.administrador = false
-          })
-        }
-        else {
-          this.logout()
-        }
+      return new Promise((resolve, reject) => {
+        this.$auth.onAuthStateChanged((user) => {
+          if (user) {
+            console.log('Usuario autenticado: ', user.email)
+            this.email = user.email
+            this.$all.user = user
+            resolve()
+          }
+          else {
+            this.logout()
+          }
+        })
       })
     },
     logout () {
@@ -45,10 +27,32 @@ export default {
         console.log('erro ao desconectar usuario')
       })
       this.$router.push('/login')
+    },
+    init (services) {
+      return this.seguranca().then(() => {
+        GrupoService.set(this.$all)
+        return GrupoService.getGrupo().then(element => {
+          this.$grupo = element
+          services.forEach(e => {
+            e.set(this.$all)
+          })
+          return
+        })
+      })
+    },
+    verificaPrimeiroAcesso () {
+      return this.seguranca().then(() => {
+        GrupoService.set(this.$all)
+        return GrupoService.getGrupo().then(element => {
+          this.$grupo = element
+          if (this.$grupo.length === 0) {
+            GrupoService.primeiroAcesso()
+          }
+        })
+      })
     }
   },
   mounted () {
-    AdminService.set(this.$all)
-    this.seguranca()
+    this.init([]).then(() => {})
   }
 }

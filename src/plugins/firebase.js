@@ -14,6 +14,7 @@ const connection = Firebase.initializeApp(config)
 const DB = connection.firestore()
 const AUTH = connection.auth()
 const STORAGE = connection.storage().ref()
+var GRUPO = {}
 
 export default ({ Vue }) => {
   Object.defineProperties(Vue.prototype, {
@@ -37,9 +38,17 @@ export default ({ Vue }) => {
         return this.$auth.currentUser
       }
     },
+    $grupo: {
+      get () {
+        return GRUPO
+      },
+      set (value) {
+        GRUPO = value
+      }
+    },
     $all: {
       get () {
-        return {db: this.$db, auth: this.$auth, user: this.$user, storage: this.$storage}
+        return {db: this.$db, auth: this.$auth, user: this.$user, storage: this.$storage, grupo: this.$grupo}
       }
     },
     $meses: {

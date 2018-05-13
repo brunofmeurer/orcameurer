@@ -22,14 +22,21 @@ export default [
     path: '/financeiro/add',
     component: () => import('../layouts/default'),
     children: [
-      { component: () => import('../pages/FinanceiroAdd'), path: '/' }
+      { component: () => import('../pages/FinanceiroForm'), path: '/' }
     ]
   },
   {
-    path: '/financeiro/movimento/:doc',
+    path: '/financeiro/edit/:doc',
     component: () => import('../layouts/default'),
     children: [
-      { component: () => import('../pages/Movimento'), path: '/' }
+      { component: () => import('../pages/FinanceiroForm'), path: '/' }
+    ]
+  },
+  {
+    path: '/financeiro/view/:doc',
+    component: () => import('../layouts/default'),
+    children: [
+      { component: () => import('../pages/FinanceiroView'), path: '/' }
     ]
   },
   {
@@ -40,10 +47,10 @@ export default [
     ]
   },
   {
-    path: '/planejamento',
+    path: '/recorrencia',
     component: () => import('../layouts/default'),
     children: [
-      { component: () => import('../pages/Planejamento'), path: '/' }
+      { component: () => import('../pages/Recorrencia'), path: '/' }
     ]
   },
   {
@@ -51,6 +58,13 @@ export default [
     component: () => import('../layouts/default'),
     children: [
       { component: () => import('../pages/Carteira'), path: '/' }
+    ]
+  },
+  {
+    path: '/grupo',
+    component: () => import('../layouts/default'),
+    children: [
+      { component: () => import('../pages/Grupo'), path: '/' }
     ]
   },
   { // Always leave this as last one

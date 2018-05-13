@@ -43,9 +43,9 @@
           <q-item-side icon="trending_up" color="orange"/>
           <q-item-main label="Financeiro" sublabel="Movimentações e lançamentos" />
         </q-item>
-        <q-item link to="/planejamento">
+        <q-item link to="/recorrencia">
           <q-item-side icon="assessment" color="orange"/>
-          <q-item-main label="Planejamento" sublabel="Criação de planejamento" />
+          <q-item-main label="Recorrencias" sublabel="Criação de recorrencias" />
         </q-item>
         <q-item link to="/categoria">
           <q-item-side icon="label" color="orange"/>
@@ -65,7 +65,6 @@
 
 <script>
 import { openURL } from 'quasar'
-import AdminService from '../services/admin-service.js'
 import Seguranca from '../components/seguranca/Seguranca.js'
 export default {
   name: 'LayoutDefault',
@@ -79,7 +78,6 @@ export default {
     openURL
   },
   mounted () {
-    AdminService.set(this.$all)
   }
 }
 </script>

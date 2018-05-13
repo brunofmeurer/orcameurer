@@ -49,6 +49,14 @@ function atualizaContador () {
   }
 }
 
+function salvar (edit) {
+  if (edit.doc != null) { // UPDATE
+    return $db.collection('contador').doc(doc).update(edit)
+  } else {
+    return $db.collection('contador').add(edit)
+  }
+}
+
 export default {
-  set, getIncrementContador
+  set, getIncrementContador, salvar
 }
