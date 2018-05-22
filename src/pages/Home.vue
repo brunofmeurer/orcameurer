@@ -5,7 +5,7 @@
       <small><cite>{{autor}}</cite></small>
     </blockquote>
     <hr>
-    <grafico-barra :height="300" ref="graficoBarra" :chart-data="listBar" title="Carteiras e seus valores"></grafico-barra>
+    <grafico-barra :height="300" ref="graficoBarra" :chart-data="listBar" title="Carteiras e seus valores atuais"></grafico-barra>
     <div class="q-pa-md">
       Total em caixa: {{total | formatMoney}}
     </div>

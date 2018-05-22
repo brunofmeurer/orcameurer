@@ -22,14 +22,28 @@ export default [
     path: '/financeiro/add',
     component: () => import('../layouts/default'),
     children: [
-      { component: () => import('../pages/FinanceiroForm'), path: '/' }
+      { component: () => import('../pages/FinanceiroBasicoForm'), path: '/' }
     ]
   },
   {
     path: '/financeiro/edit/:doc',
     component: () => import('../layouts/default'),
     children: [
-      { component: () => import('../pages/FinanceiroForm'), path: '/' }
+      { component: () => import('../pages/FinanceiroBasicoForm'), path: '/' }
+    ]
+  },
+  {
+    path: '/financeiro/add-grupo',
+    component: () => import('../layouts/default'),
+    children: [
+      { component: () => import('../pages/FinanceiroGrupoForm'), path: '/' }
+    ]
+  },
+  {
+    path: '/financeiro/edit-grupo/:doc',
+    component: () => import('../layouts/default'),
+    children: [
+      { component: () => import('../pages/FinanceiroGrupoForm'), path: '/' }
     ]
   },
   {

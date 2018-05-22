@@ -78,7 +78,7 @@
       </div>
       <div v-for="(movimento, index) in list" v-bind:key="index" class="q-pa-xs">
         <q-card v-ripple.mat class="relative-position">
-          <q-card-title class="" v-bind:class="[(movimento.efetivado ? 'bg-green-2' : 'bg-red-2')]">
+          <q-card-title v-bind:class="[(movimento.efetivado ? 'bg-green-2' : 'bg-red-2')]">
             {{movimento.valor | formatMoney}}
             <div slot="right" class="row items-center ">
               <q-chip detail icon="warning" color="negative" v-show="!movimento.efetivado" dense
@@ -90,6 +90,26 @@
           <q-card-separator class=""/>
           <q-card-main class="">
             <p class="text-faded">{{movimento.descricao}} {{movimento.data | formatDate}}</p>
+            <q-collapsible icon="pageview" label="Visualizar detalhe" ref="collaps2" v-show="movimento.grupo != null">
+              <div class="row gutter-xs">
+                <div class="col-md-4 col-sm-12" v-for="(item, index) in movimento.grupo" :key="index">
+                  <q-card v-ripple.mat class="relative-position">
+                    <q-card-title>
+                      {{item.valor | formatMoney}}
+                      <div slot="right" class="row items-center">
+                        <q-icon name="trending_up" v-show="item.tipo === 'Ganho'" color="positive"/>
+                        <q-icon name="trending_down" v-show="item.tipo === 'Despesa'" color="negative"/>
+                      </div>
+                    </q-card-title>
+                    <q-card-separator class=""/>
+                    <q-card-main class="">
+                      <p class="text-faded">{{item.descricao}} {{item.data | formatDate}}</p>
+                      <q-chip class="q-mt-sm" detail :icon="item.categoria.icone" color="orange" dense>{{item.categoria.descricao}}</q-chip>
+                    </q-card-main>
+                  </q-card>
+                </div>
+              </div>
+            </q-collapsible>
             <q-chip class="q-mt-sm" detail :icon="movimento.categoria.icone" color="orange" dense>{{movimento.categoria.descricao}}</q-chip>
           </q-card-main>
           <q-card-actions vertical>
